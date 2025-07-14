@@ -1,0 +1,23 @@
+const INTERVAL_MS    = 15 * 60 * 1000;       // 900000ms
+const PRESENTATION_ID = '1iqkyJ14Tgde2Wt9Zuhmi63h5-S4gRiQzTdkyaGlPR4w';
+const SLIDE_IDS       = ['id.SLIDES_API1681846905_0', /*…他43個…*/];
+const frame           = document.getElementById('slidesFrame');
+
+function showSlide(idx) {
+  const slideId = SLIDE_IDS[idx];
+  // Embed URL に delayms を入れる
+  const url =
+    `https://docs.google.com/presentation/d/${PRESENTATION_ID}/embed` +
+    `?start=true` +
+    `&loop=true` +
+    `&delayms=${INTERVAL_MS}` +   // ← ここで 900000ms を指定
+    `#slide=${slideId}`;          // ← スライドIDをハッシュで指定
+
+  frame.src = url;
+}
+
+// 初回
+showSlide(0);
+
+// あとは JS の setInterval で呼ぶか、省略して Google 側に任せるなら
+// setInterval(() => showSlide((current = (current+1)%SLIDE_IDS.length)), INTERVAL_MS);
