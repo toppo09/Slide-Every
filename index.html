@@ -1,22 +1,42 @@
-<iframe id="slidesFrame"></iframe>
-<script>
-  const INTERVAL_MS    = 15 * 60 * 1000;
-  const PRESENTATION_ID = '1iqky…GlPR4w';
-  const SLIDE_IDS      = [ /* your 44 ids */ ];
-  let current = 0;
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>15分ごとにスライド切り替え</title>
+  <style>
+    html, body { margin:0; padding:0; height:100%; }
+    iframe { width:100%; height:100%; border:none; }
+  </style>
+</head>
+<body>
+  <!-- ここから替える必要アリ -->
+  <iframe id="slidesFrame"></iframe>
+  <script>
+    const PRESENTATION_ID = '1iqkyJ14Tgde2Wt9Zuhmi63h5-S4gRiQzTdkyaGlPR4w';
+    const SLIDE_IDS = [
+      'id.SLIDES_API1681846905_0',
+      'id.SLIDES_API1681846905_62',
+      /* …残り42個も同じ要領で… */
+      'id.SLIDES_API1681846905_2666'
+    ];
+    const INTERVAL_MS = 15 * 60 * 1000;
+    let current = 0;
 
-  function showSlide(idx) {
-    const slideId = SLIDE_IDS[idx];
-    const url = 
-      `https://docs.google.com/presentation/d/${PRESENTATION_ID}/embed` +
-      `?start=true` +
-      `#slide=${slideId}`;
-    document.getElementById('slidesFrame').src = url;
-  }
+    function showSlide(idx) {
+      const slideId = SLIDE_IDS[idx];
+      const url =
+        `https://docs.google.com/presentation/d/${PRESENTATION_ID}/embed` +
+        `?start=true&loop=false` +
+        `#slide=${slideId}`;
+      document.getElementById('slidesFrame').src = url;
+    }
 
-  showSlide(0);
-  setInterval(() => {
-    current = (current + 1) % SLIDE_IDS.length;
-    showSlide(current);
-  }, INTERVAL_MS);
-</script>
+    showSlide(0);
+    setInterval(() => {
+      current = (current + 1) % SLIDE_IDS.length;
+      showSlide(current);
+    }, INTERVAL_MS);
+  </script>
+  <!-- ここまで -->
+</body>
+</html>
